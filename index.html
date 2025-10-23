@@ -8,67 +8,63 @@
 <link rel="preconnect" href="https://js.stripe.com">
 <style>
   :root{
-    --bg:#0e1330;          /* tmavé indigo */
-    --bg-2:#0a0f27;
-    --brand:#23d3b6;       /* tyrkys – akcent */
-    --ink:#061b29;
-    --text:#f5f8ff;
-    --muted:#c4c9da;
-    --stroke:rgba(255,255,255,.08);
-    --card:#12193d;
-    --radius:18px;
-    --shadow:0 10px 30px rgba(6,27,41,.3);
+    --bg:#0e1330;--bg-2:#0a0f27;--brand:#23d3b6;--text:#f5f8ff;--muted:#c4c9da;
+    --stroke:rgba(255,255,255,.08);--card:#12193d;--radius:18px;--shadow:0 10px 30px rgba(6,27,41,.3)
   }
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
+  *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+
   .container{max-width:1180px;margin:auto;padding:24px}
   header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,rgba(14,19,48,.9),rgba(14,19,48,.55));backdrop-filter:blur(8px);border-bottom:1px solid var(--stroke)}
   .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
   .brand{display:flex;align-items:center;gap:10px;font-weight:800}
   .brand .dot{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--brand),#6ef2da)}
-  .nav .right{display:flex;align-items:center;gap:10px}
   .badge{font-size:.85rem;color:#063b34;background:linear-gradient(90deg,rgba(35,211,182,.22),rgba(35,211,182,.1));border:1px solid rgba(35,211,182,.45);padding:6px 10px;border-radius:999px}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 18px;border-radius:12px;border:1px solid transparent;background:var(--brand);color:#042a25;font-weight:800;cursor:pointer;transition:.2s transform,.2s box-shadow}
   .btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(35,211,182,.18)}
   .btn.ghost{background:transparent;border:1px solid var(--stroke);color:var(--text)}
+
   /* hero */
   .hero{position:relative;overflow:hidden}
-  .hero-wrap{padding:64px 0 36px;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center}
+  .hero-wrap{padding:64px 0 36px;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center;position:relative}
   h1{font-size:56px;line-height:1.05;margin:12px 0 12px;letter-spacing:.2px}
   .lead{color:var(--muted);max-width:52ch;margin:0 0 22px}
   .underline{position:relative;display:inline-block}
-  .underline:after{
-    content:""; position:absolute; left:0; right:0; bottom:-6px; height:12px;
-    background: radial-gradient(20px 12px at 10px 6px, rgba(35,211,182,.65), transparent 70%) repeat-x;
-    background-size:36px 12px; filter:drop-shadow(0 3px 0 rgba(35,211,182,.25));
-  }
+  .underline:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:12px;background: radial-gradient(20px 12px at 10px 6px, rgba(35,211,182,.65), transparent 70%) repeat-x;background-size:36px 12px;filter:drop-shadow(0 3px 0 rgba(35,211,182,.25))}
   .cta-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  .sub{font-size:.9rem;color:var(--muted)}
-  /* vlny */
-  .waves{position:absolute;inset:auto 0 0 0;height:180px;pointer-events:none}
-  .wave{position:absolute;inset:auto 0 0 0;height:100px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.02));}
-  .wave.one{background:radial-gradient(120% 180% at 50% 140%,var(--bg-2) 0%,transparent 70%);}
-  .wave.two{bottom:0;height:140px;background:radial-gradient(120% 180% at 50% 140%,#0b1333 0%,transparent 65%);}
-  /* loga */
   .trust{display:flex;gap:36px;flex-wrap:wrap;opacity:.7;margin-top:28px}
   .logo{height:20px;opacity:.8;filter:grayscale(1) brightness(1.3)}
-  /* karty */
+
+  /* decorative floaters */
+  .deco{position:absolute;pointer-events:none;filter:drop-shadow(0 10px 16px rgba(0,0,0,.25))}
+  .float1{animation:float1 6s ease-in-out infinite}
+  .float2{animation:float2 7.5s ease-in-out infinite}
+  .float3{animation:float3 8s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes float2{0%,100%{transform:translateY(-4px) rotate(-2deg)}50%{transform:translateY(10px) rotate(4deg)}}
+  @keyframes float3{0%,100%{transform:translateY(6px)}50%{transform:translateY(-8px)}}
+
+  /* waves */
+  .waves{position:absolute;inset:auto 0 0 0;height:180px;pointer-events:none}
+  .wave{position:absolute;inset:auto 0 0 0;height:100px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.02))}
+  .wave.one{background:radial-gradient(120% 180% at 50% 140%,var(--bg-2) 0%,transparent 70%)}
+  .wave.two{bottom:0;height:140px;background:radial-gradient(120% 180% at 50% 140%,#0b1333 0%,transparent 65%)}
+
+  /* cards */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:26px 0}
   .card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
   .card h3{margin:0 0 6px}
   .price{font-size:28px;font-weight:900;margin:10px 0 14px}
   .chip{display:inline-block;font-size:.82rem;padding:4px 10px;border-radius:999px;border:1px solid var(--stroke);color:#cbd3ea;margin-bottom:8px}
   .note{color:#aeb6cb;font-size:.9rem;margin-top:8px}
+
   /* FAQ */
   .section{margin-top:34px}
   details{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:14px 16px}
   summary{cursor:pointer;font-weight:700}
   .faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  /* footer */
+
   footer{border-top:1px solid var(--stroke);margin-top:40px;padding:26px 0;color:#aeb6cb;font-size:.93rem}
-  /* responsive */
   @media (max-width:1000px){ .hero-wrap{grid-template-columns:1fr} h1{font-size:44px} .grid{grid-template-columns:1fr 1fr} .faq{grid-template-columns:1fr} }
   @media (max-width:640px){ .container{padding:18px} h1{font-size:36px} .grid{grid-template-columns:1fr} }
 </style>
@@ -88,6 +84,7 @@
   </div>
 </header>
 
+<!-- HERO -->
 <main class="hero">
   <div class="container hero-wrap">
     <div>
@@ -97,7 +94,7 @@
         <a href="#tarify" class="btn">Vybrat tarif</a>
         <span class="badge">Limited offer – pilot 2026</span>
       </div>
-      <div class="trust">
+      <div class="trust" aria-hidden="true">
         <img class="logo" src="https://dummyimage.com/88x20/ffffff/ffffff.png&text=Spotify" alt="">
         <img class="logo" src="https://dummyimage.com/60x20/ffffff/ffffff.png&text=Nike" alt="">
         <img class="logo" src="https://dummyimage.com/68x20/ffffff/ffffff.png&text=AMD" alt="">
@@ -107,13 +104,25 @@
     <div>
       <img src="https://dummyimage.com/680x420/1a214f/ffffff.png&text=eSIM+illustration" alt="Founio eSIM">
     </div>
+
+    <!-- floating emojis -->
+    <img class="deco float1" style="top:10%;left:8%;width:64px"
+      src="https://twemoji.maxcdn.com/v/latest/svg/1f4ac.svg" alt="" aria-hidden="true">
+    <img class="deco float2" style="top:18%;right:14%;width:78px"
+      src="https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg" alt="" aria-hidden="true">
+    <img class="deco float3" style="bottom:22%;right:6%;width:82px"
+      src="https://twemoji.maxcdn.com/v/latest/svg/2601.svg" alt="" aria-hidden="true">
+    <img class="deco float2" style="bottom:26%;left:18%;width:72px;filter:hue-rotate(30deg)"
+      src="https://twemoji.maxcdn.com/v/latest/svg/1f680.svg" alt="" aria-hidden="true">
   </div>
+
   <div class="waves">
     <div class="wave one"></div>
     <div class="wave two"></div>
   </div>
 </main>
 
+<!-- TARIFY -->
 <section id="tarify" class="container">
   <div class="grid">
     <article class="card">
@@ -124,7 +133,6 @@
       <button class="btn buy" data-price-id="price_START_REPLACE">Koupit – eSIM</button>
       <p class="note">Bez FUP • Bez řízení rychlosti</p>
     </article>
-
     <article class="card">
       <span class="chip">Founio Talk</span>
       <h3>Neomezené volání + 10 SMS</h3>
@@ -133,7 +141,6 @@
       <button class="btn buy" data-price-id="price_TALK_REPLACE">Koupit – eSIM</button>
       <p class="note">CZ/PL/SK • Plynulý handover</p>
     </article>
-
     <article class="card">
       <span class="chip">Founio Data</span>
       <h3>Neomezené volání + 10 SMS + 3 GB</h3>
@@ -149,22 +156,10 @@
 <section class="container section">
   <h2 style="margin:0 0 12px">FAQ</h2>
   <div class="faq">
-    <details>
-      <summary>Vypadává signál při jízdě podél hranic?</summary>
-      <div>A právě tady září Founio: Multi-IMSI se automaticky přepíná na nejsilnější síť v místě. Žádné ruční zásahy, žádné výpadky.</div>
-    </details>
-    <details>
-      <summary>Je rychlost omezena / existuje FUP?</summary>
-      <div>Neomezujeme rychlost ani nezavádíme FUP. Výkon určuje pouze kvalita sítě v lokalitě.</div>
-    </details>
-    <details>
-      <summary>Jak rychle dostanu eSIM?</summary>
-      <div>Hned po úspěšné platbě přijde e-mail s QR kódem a návodem. Aktivace zabere zhruba 2 minuty.</div>
-    </details>
-    <details>
-      <summary>Umíte i IoT/SIM do zařízení?</summary>
-      <div>Ano. Navíc podporujeme Low-latency a lokální breakout dle země. Napište nám pro specifikaci.</div>
-    </details>
+    <details><summary>Vypadává signál při jízdě podél hranic?</summary><div>Multi-IMSI se automaticky přepíná na nejsilnější síť v místě. Žádné výpadky.</div></details>
+    <details><summary>Je rychlost omezena / existuje FUP?</summary><div>Ne – výkon určuje pouze kvalita sítě v lokalitě.</div></details>
+    <details><summary>Jak rychle dostanu eSIM?</summary><div>Hned po úspěšné platbě dorazí e-mail s QR kódem. Aktivace ~2 minuty.</div></details>
+    <details><summary>Umíte i IoT?</summary><div>Ano, podpora low-latency a lokálního breakout dle země.</div></details>
   </div>
 </section>
 
@@ -175,17 +170,13 @@
   </div>
 </footer>
 
-<!-- Stripe checkout -->
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-  // 🔑 vyplň svůj publishable key
   const STRIPE_PUBLISHABLE_KEY = "pk_test_REPLACE_ME";
   const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
-
   async function createSession(priceId){
     const res = await fetch("/.netlify/functions/create-checkout-session", {
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
+      method:"POST", headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({ priceId })
     });
     const data = await res.json();
