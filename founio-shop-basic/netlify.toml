@@ -1,5 +1,4 @@
 [build]
-  base = "founio-shop-basic"
   publish = "."
   command = ""
 
