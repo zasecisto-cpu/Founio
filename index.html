@@ -8,6 +8,55 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
+    /* Vlny pod hero sekcí */
+.waves-wrap{
+  position: relative;
+  width: 100%;
+  height: 180px;     /* můžeš jemně doladit (160–220) */
+  overflow: hidden;
+  background: transparent;
+  margin-top: 24px;  /* malý rozestup od hero */
+}
+
+.wave{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 180px;
+}
+
+.wave-1 path{ fill:#1b2240; }         /* nejtmavší */
+.wave-2 path{ fill:#232c56; opacity:.85; }
+.wave-3 path{ fill:#2d3771; opacity:.7; }
+
+/* Bílá sekce s horní křivkou */
+.section-features{
+  position: relative;
+  background:#ffffff;
+  color:#0e1b3d;
+  padding-top: 64px;       /* po křivce */
+  padding-bottom: 56px;
+  z-index: 1;
+}
+
+.section-features .features-curve{
+  position:absolute;
+  top:-78px;               /* „překrytí“ přes vlny – dolaď +/- pár px */
+  left:0;
+  width:100%;
+  height:80px;
+}
+.section-features .features-curve path{ fill:#ffffff; }
+
+/* (volitelně) lehké stíny boxů v bílé sekci pro „air“ efekt */
+.card{
+  background: #f7f8ff;
+  border: 1px solid rgba(22,27,60,.06);
+  box-shadow: 0 10px 24px rgba(9,13,40,.06);
+  border-radius: 16px;
+}
+
     :root{
       --bg-deep:#0e1630;
       --bg-deeper:#0a1229;
@@ -46,6 +95,32 @@
     .badge{width:66px;height:12px;border-radius:6px;background:#20305a;box-shadow:inset 0 0 0 1px #2a3a6f}
     .hero-card{background:#101b3d;border:1px solid #1a2651;border-radius:18px;padding:28px;box-shadow:var(--shadow);position:relative;min-height:280px;display:flex;align-items:center;justify-content:center}
     .hero-card h3{margin:0;font-size:36px;font-weight:800;color:#dfe8ff;opacity:.95}
+    <!-- Layered wave divider -->
+<div class="waves-wrap" aria-hidden="true">
+  <!-- hluboká vlna -->
+  <svg class="wave wave-1" viewBox="0 0 1440 200" preserveAspectRatio="none">
+    <path d="M0,120 C180,160 360,160 540,130 C720,100 900,40 1080,55 C1260,70 1350,115 1440,130 L1440,200 L0,200 Z"/>
+  </svg>
+
+  <!-- střední vlna -->
+  <svg class="wave wave-2" viewBox="0 0 1440 200" preserveAspectRatio="none">
+    <path d="M0,140 C220,170 420,150 640,120 C860,90 1080,60 1240,90 C1360,112 1440,130 1440,130 L1440,200 L0,200 Z"/>
+  </svg>
+
+  <!-- horní vlna (nejsvětlejší) -->
+  <svg class="wave wave-3" viewBox="0 0 1440 200" preserveAspectRatio="none">
+    <path d="M0,150 C240,170 480,140 720,130 C960,120 1200,140 1440,150 L1440,200 L0,200 Z"/>
+  </svg>
+</div>
+
+<!-- Bílá „nájezdová“ křivka (horní hrana bílé sekce) -->
+<section id="features" class="section-features">
+  <svg class="features-curve" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 C240,85 480,5 720,35 C960,65 1200,45 1440,15 L1440,80 L0,80 Z"></path>
+  </svg>
+
+  <!-- ...zde už nech klidně svůj obsah tří karet (nadpis + 3 boxy)... -->
+
     /* FLOATERS */
     .float{position:absolute;pointer-events:none;filter:drop-shadow(0 10px 20px rgba(0,0,0,.35))}
     .f-bubble{left:-6px;top:-12px}
