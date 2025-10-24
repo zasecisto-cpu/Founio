@@ -90,4 +90,273 @@
       display:grid; gap:14px;
       grid-template-columns:repeat(3,minmax(0,1fr));
     }
+    .f-item{
+      background:var(--card); border-radius:16px; padding:14px 16px; text-align:left;
+      display:flex; gap:12px; align-items:flex-start; border:1px solid var(--ring);
+    }
+    .f-ico{
+      width:28px; height:28px; border-radius:8px; flex:0 0 auto;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    }
+    .f-item h3{margin:0 0 4px; font-size:15px}
+    .f-item p{margin:0; color:var(--muted); font-size:14px; line-height:1.5}
+
+    /* Waves under hero */
+    .waves-wrap{
+      position:relative; width:100%; height:180px; overflow:hidden; background:transparent; margin-top:24px;
+    }
+    .waves-wrap svg{
+      position:absolute; bottom:0; left:0; width:200%; height:100%;
+      animation:waveMove 12s linear infinite;
+    }
+    @keyframes waveMove{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* Pricing */
+    .pricing{padding:38px 20px 80px}
+    .container{max-width:1100px; margin:0 auto}
+    .section-head{text-align:center; margin-bottom:20px}
+    .section-head h2{margin:0 0 8px; font-size:clamp(22px,3vw,32px)}
+    .section-head p{margin:0; color:var(--muted)}
+    .pricing-grid{
+      display:grid; gap:16px; grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .p-card{
+      background:var(--bg); border:1px solid var(--ring); border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:20px; display:flex; flex-direction:column; gap:10px;
+    }
+    .p-card h4{margin:0; font-size:18px}
+    .badge{
+      display:inline-block; font-size:12px; font-weight:700; padding:4px 8px; border-radius:999px;
+      background:#ecf9ff; color:#005871; border:1px solid #cdefff;
+    }
+    .price{font-size:28px; font-weight:900}
+    .p-card ul{list-style:none; padding:0; margin:8px 0 0}
+    .p-card ul li{padding-left:22px; position:relative; margin:8px 0; color:var(--muted)}
+    .p-card ul li:before{
+      content:""; position:absolute; left:0; top:7px; width:10px; height:10px; border-radius:3px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    }
+    .buy{margin-top:auto}
+
+    /* FAQ */
+    .faq{padding:20px 20px 60px}
+    .faq-grid{display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr))}
+    .qa{border:1px solid var(--ring); border-radius:14px; padding:16px; background:var(--card)}
+    .qa h4{margin:0 0 6px}
+
+    /* Contact */
+    .contact{padding:30px 20px 80px}
+    .contact-card{
+      border:1px solid var(--ring); background:var(--bg); border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:20px; display:grid; gap:12px;
+      grid-template-columns:1.3fr 1fr;
+    }
+    .contact small{color:var(--muted)}
+
+    /* Footer */
+    footer{border-top:1px solid var(--ring); padding:24px 20px; text-align:center; color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:960px){
+      .f-grid{grid-template-columns:1fr}
+      .pricing-grid{grid-template-columns:1fr}
+      .faq-grid{grid-template-columns:1fr}
+      .contact-card{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Founio</span>
+      </div>
+      <div class="nav-spacer"></div>
+      <a href="#tarify">Tarify</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="uvod">
+    <h1>Druhá eSIM, která nikdy neztratí signál</h1>
+    <p>Multi-IMSI řešení s pokrytím celé Evropy bez roamingu. Automatické přepínání mezi sítěmi – ideální pro život na hranici CZ/PL/SK, řidiče a každého, kdo potřebuje spolehlivá data a volání.</p>
+
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#tarify">Vybrat tarif</a>
+      <a class="btn btn-ghost" href="#faq">Jak to funguje?</a>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" aria-label="Hlavní výhody">
+    <div class="f-grid">
+      <div class="f-item">
+        <div class="f-ico" aria-hidden="true"></div>
+        <div>
+          <h3>Plynulé přechody CZ/PL/SK</h3>
+          <p>Telefon si vždy vybere nejlepší dostupnou síť bez výpadků a bez ručního přepínání.</p>
+        </div>
+      </div>
+      <div class="f-item">
+        <div class="f-ico" aria-hidden="true"></div>
+        <div>
+          <h3>Bez roamingu</h3>
+          <p>Tarify koncipované pro přeshraniční provoz – volání i data bez nepříjemných překvapení.</p>
+        </div>
+      </div>
+      <div class="f-item">
+        <div class="f-ico" aria-hidden="true"></div>
+        <div>
+          <h3>Aktivace do pár minut</h3>
+          <p>QR kód eSIM po zaplacení. Funguje v iPhone i Android telefonech s eSIM.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Waves under hero -->
+  <div class="waves-wrap" aria-hidden="true">
+    <svg viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,60 C300,120 900,0 1200,60 L1200,200 L0,200 Z" fill="#00AEEF" opacity="0.28"></path>
+      <path d="M0,100 C300,160 900,40 1200,100 L1200,200 L0,200 Z" fill="#00AEEF" opacity="0.46"></path>
+      <path d="M0,140 C300,200 900,80 1200,140 L1200,200 L0,200 Z" fill="#00AEEF"></path>
+    </svg>
+  </div>
+
+  <!-- PRICING -->
+  <section id="tarify" class="pricing">
+    <div class="container">
+      <div class="section-head" style="color:#0e1630">
+        <h2>Nabídka tarifů</h2>
+        <p>Vše s DPH. Platba přes Stripe Checkout.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Plan 1 -->
+        <div class="p-card">
+          <span class="badge">Nejlevnější start</span>
+          <h4>Founio Start</h4>
+          <div class="price">299 Kč</div>
+          <ul>
+            <li>60 minut + 10 SMS</li>
+            <li>Záloha pro přeshraniční provoz</li>
+            <li>Plynulé přechody CZ/PL/SK</li>
+            <li>Aktivace eSIM do pár minut</li>
+          </ul>
+          <button class="btn btn-primary buy" data-plan="start">Koupit – eSIM</button>
+        </div>
+
+        <!-- Plan 2 -->
+        <div class="p-card">
+          <span class="badge">Nejpopulárnější</span>
+          <h4>Founio Talk</h4>
+          <div class="price">499 Kč</div>
+          <ul>
+            <li>Neomezené volání + 10 SMS</li>
+            <li>Pro řidiče a týmy u hranic</li>
+            <li>Multi-IMSI bez výpadků</li>
+            <li>Aktivace eSIM do pár minut</li>
+          </ul>
+          <button class="btn btn-primary buy" data-plan="talk">Koupit – eSIM</button>
+        </div>
+
+        <!-- Plan 3 -->
+        <div class="p-card">
+          <span class="badge">Pro data</span>
+          <h4>Founio Data</h4>
+          <div class="price">599 Kč</div>
+          <ul>
+            <li>10 GB v CZ/PL/SK (EU)</li>
+            <li>Auto výběr nejlepší sítě</li>
+            <li>Hotspot povolen</li>
+            <li>Okamžitá aktivace eSIM</li>
+          </ul>
+          <button class="btn btn-primary buy" data-plan="data">Koupit – eSIM</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <div class="section-head">
+        <h2>Časté otázky</h2>
+        <p>Krátké vysvětlení toho nejdůležitějšího.</p>
+      </div>
+
+      <div class="faq-grid">
+        <div class="qa">
+          <h4>Co je Multi-IMSI?</h4>
+          <p>SIM profil, který obsahuje více identit (IMSI) a umí mezi nimi přepínat podle dostupnosti a kvality sítě. Výsledek: stabilnější signál a méně výpadků.</p>
+        </div>
+        <div class="qa">
+          <h4>Potřebuji nový telefon?</h4>
+          <p>Stačí zařízení s podporou eSIM (většina novějších iPhone a Android modelů). Founio funguje jako druhá eSIM vedle vaší primární SIM.</p>
+        </div>
+        <div class="qa">
+          <h4>Jak probíhá aktivace?</h4>
+          <p>Po zaplacení dostanete e-mailem QR kód. Naskenujete v nastavení telefonu a eSIM je aktivní během pár minut.</p>
+        </div>
+        <div class="qa">
+          <h4>FUP a data v EU?</h4>
+          <p>Tarify jsou navrženy pro přeshraniční provoz v CZ/PL/SK a EU. U datových tarifů platí férové limity dle podmínek tarifu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="kontakt" class="contact">
+    <div class="container">
+      <div class="section-head">
+        <h2>Kontakt</h2>
+        <p>Napište si o firemní řešení pro týmy u hranic.</p>
+      </div>
+
+      <div class="contact-card">
+        <div>
+          <h3>Máte otázky k integraci nebo fakturaci?</h3>
+          <p>Pomůžeme s výběrem tarifu, aktivací více eSIM naráz i s fakturací na IČO.</p>
+          <p><strong>E-mail:</strong> hello@founio.cz<br>
+             <strong>Telefon:</strong> +420 000 000 000<br>
+             <small>Po-Pá 9:00–17:00</small>
+          </p>
+        </div>
+        <form id="contactForm" onsubmit="event.preventDefault(); alert('Díky! Ozveme se.');">
+          <label>Jméno<br><input required type="text" name="name" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--ring)"></label><br><br>
+          <label>E-mail<br><input required type="email" name="email" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--ring)"></label><br><br>
+          <label>Zpráva<br><textarea required name="msg" rows="4" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--ring)"></textarea></label><br><br>
+          <button class="btn btn-primary" type="submit">Odeslat</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="y"></span> Founio — Multi-IMSI eSIM pro CZ/PL/SK. Všechna práva vyhrazena.
+  </footer>
+
+  <script>
+    // Rok ve footru
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Stripe Checkout – placeholder logika.
+    // Tady napojíš reálné odkazy na Stripe Checkout session (nebo fetch na backend).
+    document.querySelectorAll('.buy').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const plan = btn.getAttribute('data-plan');
+        // TODO: přesměruj na Stripe URL podle plánu
+        // window.location.href = 'https://checkout.stripe.com/c/pay_session_xyz';
+        alert('Vybraný plán: '+plan+' — sem přidej přesměrování na Stripe.');
+      });
+    });
+  </script>
+</body>
+</html>
 
