@@ -4,13 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Founio — Druhá eSIM, která nikdy neztratí signál</title>
-  <meta name="description" content="Founio: Multi-IMSI eSIM pro CZ/PL/SK. Plynulé přepínání sítí, bez roamingu, aktivace do pár minut." />
+  <meta name="description" content="Founio: Multi-IMSI eSIM pro CZ/PL/SK. Plynulé přepínání mezi sítěmi bez roamingu a bez výpadků. Aktivace do 5 minut." />
 
   <!-- UX/SEO polish -->
   <meta name="theme-color" content="#0a1020">
-  <meta property="og:title" content="Founio — Druhá eSIM, která nikdy neztratí signál">
-  <meta property="og:description" content="Multi-IMSI eSIM pro CZ/PL/SK. Plynulé přepínání mezi sítěmi, bez roamingu, aktivace do pár minut.">
-  <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='12' width='64' height='64' fill='%2300d2ff'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='38' font-family='Inter' fill='%23001018'%3EF%3C/text%3E%3C/svg%3E">
 
   <!-- Fonts -->
@@ -31,12 +28,8 @@
       --hero-sub:#c7d3ff;
       --wave-1:#0f1c3d; --wave-2:#16285a; --wave-3:#1f3c80;
 
-      /* Light (unused for FAQ/Contact now) */
-      --light-bg:#ffffff; --light-text:#0e1630; --light-muted:#5b6071;
-
       /* Cards/lines */
       --stroke:rgba(255,255,255,.08);
-      --ring:rgba(0,0,0,.06);
       --radius:18px; --maxw:1150px;
     }
 
@@ -113,55 +106,37 @@
     .waves svg{position:absolute; left:0; bottom:0; width:200%; height:100%; animation:slide 14s linear infinite}
     @keyframes slide{from{transform:translateX(0)} to{transform:translateX(-50%)}}
 
-    /* ===== Pricing (Pay3-inspired — dark glass block) ===== */
-    .pricing-wrap{
-      position:relative;
-      padding:64px 0 80px;
+    /* Dark glass blocks */
+    .block{
+      position:relative; padding:56px 0;
       background:
         radial-gradient(900px 420px at 10% -10%, #2a86ff22 0%, transparent 60%),
         radial-gradient(1000px 500px at 95% 10%, #00d2ff1f 0%, transparent 60%),
         linear-gradient(180deg, #0b1330, #0a1022 55%, #0a1020);
-      color:var(--text);
       border-top:1px solid rgba(255,255,255,.06);
       border-bottom:1px solid rgba(255,255,255,.06);
+      color:var(--text);
     }
     .section{max-width:var(--maxw); margin:0 auto; padding:0 20px}
     .section h2{margin:0 0 10px; font-size:clamp(24px,3vw,36px)}
     .section p.lead{margin:0 0 18px; color:#b8c3ff}
-    /* Toggle */
-    .billing{ margin:14px 0 24px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-    .pill{
-      display:inline-flex; align-items:center; gap:6px; padding:6px; border-radius:999px;
-      background:rgba(255,255,255,.06); border:1px solid var(--stroke);
-    }
-    .pill button{
-      border:0; background:transparent; color:#cfe3ff; padding:8px 14px; border-radius:999px; font-weight:800; cursor:pointer;
-    }
-    .pill button.active{
-      color:#001018; background:linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow:0 8px 24px rgba(0,210,255,.35);
-    }
-    .save{color:#21e0b8; font-weight:800; font-size:12px; background:rgba(33,224,184,.12); padding:6px 10px; border-radius:999px; border:1px solid rgba(33,224,184,.3)}
 
-    /* Cards */
+    /* Pricing (reuses dark block) */
     .pricing-grid{display:grid; gap:16px; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:10px}
     .pcard{
       position:relative; border-radius:20px; padding:20px; overflow:hidden;
       background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
       border:1px solid var(--stroke);
       box-shadow:0 20px 60px rgba(0,0,0,.45), 0 2px 10px rgba(0,0,0,.35);
-      display:flex; flex-direction:column; gap:12px;
-      isolation:isolate;
+      display:flex; flex-direction:column; gap:12px; isolation:isolate;
     }
     .p-edge{position:absolute; inset:-1px; border-radius:22px; padding:1px; pointer-events:none;
       background:linear-gradient(135deg, #00d2ff55, #2a86ff55);
       mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite:xor; mask-composite:exclude; z-index:-1;}
-    .badge{
-      display:inline-block; font-size:12px; font-weight:800; padding:4px 8px; border-radius:999px;
-      background:rgba(0,210,255,.15); color:#89ecff; border:1px solid rgba(0,210,255,.35)
-    }
+    .badge{display:inline-block; font-size:12px; font-weight:800; padding:4px 8px; border-radius:999px;
+      background:rgba(0,210,255,.15); color:#89ecff; border:1px solid rgba(0,210,255,.35)}
     .badge.hot{ background:rgba(42,134,255,.18); color:#beddff; border-color:rgba(42,134,255,.4)}
     .title{font-weight:900; font-size:18px}
     .price{ font-size:34px; font-weight:900; letter-spacing:-.2px; }
@@ -175,47 +150,15 @@
       box-shadow:0 0 0 3px rgba(0,210,255,.15);
     }
     .buy{margin-top:auto}
-    .pcard button{width:100%}
+    .btn-primary, .btn-ghost{width:fit-content}
 
-    /* ===== FAQ (dark glass) ===== */
-    .faq-wrap{
-      position:relative;
-      padding:64px 0 80px;
-      background:
-        radial-gradient(900px 420px at 90% -10%, #2a86ff22 0%, transparent 60%),
-        radial-gradient(1000px 500px at 5% 10%, #00d2ff1f 0%, transparent 60%),
-        linear-gradient(180deg, #0b1330, #0a1022 55%, #0a1020);
-      color:var(--text);
-      border-top:1px solid rgba(255,255,255,.06);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .faq-grid{display:grid; gap:14px; grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:14px}
-    .qa{
+    /* FAQ + Contact dark glass */
+    .grid-2{display:grid; gap:14px; grid-template-columns:repeat(2,minmax(0,1fr))}
+    .card-glass{
       background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
       border:1px solid var(--stroke); border-radius:16px; padding:16px;
       box-shadow:0 12px 36px rgba(0,0,0,.35);
     }
-    .qa h4{margin:0 0 6px}
-    .qa p{margin:0; color:#d6defe}
-
-    /* ===== Kontakt (dark glass) ===== */
-    .contact-wrap{
-      position:relative;
-      padding:64px 0 90px;
-      background:
-        radial-gradient(900px 420px at 10% -10%, #2a86ff22 0%, transparent 60%),
-        radial-gradient(1000px 500px at 95% 10%, #00d2ff1f 0%, transparent 60%),
-        linear-gradient(180deg, #0b1330, #0a1022 55%, #0a1020);
-      color:var(--text);
-      border-top:1px solid rgba(255,255,255,.06);
-    }
-    .contact-grid{display:grid; gap:16px; grid-template-columns:1.2fr .8fr; margin-top:16px}
-    .contact-card{
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border:1px solid var(--stroke); border-radius:18px; padding:20px;
-      box-shadow:0 12px 36px rgba(0,0,0,.35);
-    }
-    .contact-card small{color:#c7d3ff}
     .input{
       width:100%; padding:12px; border-radius:12px;
       border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:#f6f8ff;
@@ -229,8 +172,7 @@
     /* Responsive */
     @media (max-width:1024px){ .hero{grid-template-columns:1fr} .hero-card{order:2} }
     @media (max-width:920px){
-      .f-grid, .pricing-grid, .faq-grid{grid-template-columns:1fr}
-      .contact-grid{grid-template-columns:1fr}
+      .f-grid, .pricing-grid, .grid-2{grid-template-columns:1fr}
       .mini-cta{display:none}
     }
   </style>
@@ -244,6 +186,7 @@
       <div class="brand"><div class="logo" aria-hidden="true"></div><span>Founio</span></div>
       <div class="spacer"></div>
       <a href="#tarify">Tarify</a>
+      <a href="#jaktofunguje">Jak to funguje</a>
       <a href="#faq">FAQ</a>
       <a href="#kontakt">Kontakt</a>
       <a class="btn btn-primary mini-cta" href="#tarify">Koupit eSIM</a>
@@ -255,10 +198,10 @@
     <div>
       <span class="h-eyebrow">Multi-IMSI • CZ/PL/SK bez roamingu</span>
       <h1>Druhá eSIM, která nikdy neztratí signál</h1>
-      <p>Telefon si vždy vybere nejlepší dostupnou síť a plynule přepne. Ideální pro život na hranici, řidiče i týmy v terénu.</p>
+      <p>Telefon si vždy vybere nejlepší dostupnou síť v Česku, Polsku nebo na Slovensku — a plynule přepne. Bez ručního přepínání, bez roamingu, bez výpadků.</p>
       <div class="actions">
         <a class="btn btn-primary" href="#tarify">Vybrat tarif</a>
-        <a class="btn btn-ghost" href="#faq">Jak to funguje?</a>
+        <a class="btn btn-ghost" href="#jaktofunguje">Jak to funguje?</a>
       </div>
     </div>
     <aside class="hero-card">
@@ -275,9 +218,9 @@
   <!-- FEATURES -->
   <section class="features" aria-label="Hlavní výhody">
     <div class="f-grid">
-      <div class="f"><div class="ico" aria-hidden="true"></div><h3>Plynulé přechody CZ/PL/SK</h3><p>Automatický výběr nejsilnější sítě bez výpadků a ručního přepínání.</p></div>
-      <div class="f"><div class="ico" aria-hidden="true"></div><h3>Bez roamingu</h3><p>Tarify navržené pro přeshraniční provoz — férové podmínky bez překvapení.</p></div>
-      <div class="f"><div class="ico" aria-hidden="true"></div><h3>Aktivace do pár minut</h3><p>QR kód eSIM po zaplacení. Funguje na většině nových telefonů.</p></div>
+      <div class="f"><div class="ico" aria-hidden="true"></div><h3>Aktivace do 5 minut</h3><p>QR kód eSIM dorazí e-mailem hned po zaplacení.</p></div>
+      <div class="f"><div class="ico" aria-hidden="true"></div><h3>EU pokrytí</h3><p>Stabilní signál v CZ/PL/SK, bez výpadků při pohybu.</p></div>
+      <div class="f"><div class="ico" aria-hidden="true"></div><h3>Bez roamingu</h3><p>Jedna férová cena. Žádné skryté poplatky.</p></div>
     </div>
   </section>
 
@@ -290,31 +233,30 @@
     </svg>
   </div>
 
-  <!-- ===== PRICING (PAY3 STYLE) ===== -->
-  <section class="pricing-wrap" id="tarify" aria-label="Ceník">
+  <!-- ===== PRICING ===== -->
+  <section class="block" id="tarify" aria-label="Ceník">
     <div class="section">
       <h2>Ceník Founio</h2>
       <p class="lead">Vše s DPH. Platba přes Stripe Checkout. Při roční platbě získáte <strong>10 % slevu</strong>.</p>
 
       <!-- Toggle -->
-      <div class="billing">
-        <div class="pill" role="tablist" aria-label="Fakturace">
-          <button id="bill-monthly" class="active" role="tab" aria-selected="true">Měsíčně</button>
-          <button id="bill-annual" role="tab" aria-selected="false">Ročně</button>
+      <div class="actions" style="margin-top:0">
+        <div class="btn-ghost" style="display:inline-flex; gap:6px; padding:6px; border-radius:999px; border:1px solid var(--stroke); background:rgba(255,255,255,.06);">
+          <button id="bill-monthly" class="btn" style="padding:8px 14px; border-radius:999px; font-weight:800; background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#001018; box-shadow:0 8px 24px rgba(0,210,255,.35);">Měsíčně</button>
+          <button id="bill-annual" class="btn" style="padding:8px 14px; border-radius:999px; font-weight:800; color:#dfe6ff; background:transparent;">Ročně</button>
         </div>
-        <span class="save">💎 10 % sleva u roční platby</span>
+        <span class="btn-ghost" style="padding:8px 12px; border-radius:999px;">💎 10 % sleva u roční platby</span>
       </div>
 
-      <div class="pricing-grid">
+      <div class="pricing-grid" style="margin-top:16px">
         <!-- START -->
         <article class="pcard" data-plan="start" data-month="299">
           <div class="p-edge"></div>
           <span class="badge">Nejlevnější start</span>
           <div class="title">Founio Start</div>
           <div><span class="price"><span class="value">299</span> Kč</span> <span class="period">/ měs.</span></div>
-          <div class="inc">Obsahuje 60 min + 10 SMS • plynulé CZ/PL/SK</div>
+          <div class="inc">60 min + 10 SMS • plynulé CZ/PL/SK</div>
           <ul class="list">
-            <li>60 minut + 10 SMS</li>
             <li>Záloha pro přeshraniční provoz</li>
             <li>Plynulé přechody CZ/PL/SK</li>
             <li>Aktivace eSIM do pár minut</li>
@@ -330,7 +272,6 @@
           <div><span class="price"><span class="value">499</span> Kč</span> <span class="period">/ měs.</span></div>
           <div class="inc">Neomezené volání + 10 SMS • Multi-IMSI bez výpadků</div>
           <ul class="list">
-            <li>Neomezené volání + 10 SMS</li>
             <li>Pro řidiče a týmy u hranic</li>
             <li>Multi-IMSI bez výpadků</li>
             <li>Aktivace eSIM do pár minut</li>
@@ -346,7 +287,6 @@
           <div><span class="price"><span class="value">599</span> Kč</span> <span class="period">/ měs.</span></div>
           <div class="inc">10 GB v CZ/PL/SK (EU) • Hotspot povolen</div>
           <ul class="list">
-            <li>10 GB v CZ/PL/SK (EU)</li>
             <li>Automatický výběr nejlepší sítě</li>
             <li>Hotspot povolen</li>
             <li>Okamžitá aktivace eSIM</li>
@@ -357,34 +297,61 @@
     </div>
   </section>
 
-  <!-- ===== FAQ (DARK GLASS) ===== -->
-  <section id="faq" class="faq-wrap" aria-label="Časté otázky">
+  <!-- ===== JAK TO FUNGUJE (text přesně podle zadání) ===== -->
+  <section class="block" id="jaktofunguje" aria-label="Jak to funguje">
     <div class="section">
-      <h2>Časté otázky</h2>
-      <p class="lead">Krátké vysvětlení toho nejdůležitějšího.</p>
-      <div class="faq-grid">
-        <div class="qa"><h4>Co je Multi-IMSI?</h4><p>SIM profil s více identitami (IMSI), mezi nimiž zařízení přepíná podle kvality a dostupnosti sítě — stabilnější signál, méně výpadků.</p></div>
-        <div class="qa"><h4>Potřebuji nový telefon?</h4><p>Stačí zařízení s eSIM (většina novějších iPhone a Android). Founio funguje jako druhá eSIM vedle vaší primární SIM.</p></div>
-        <div class="qa"><h4>Jak probíhá aktivace?</h4><p>Po zaplacení e-mailem dorazí QR kód. Naskenujete v nastavení telefonu a během pár minut je hotovo.</p></div>
-        <div class="qa"><h4>FUP a data v EU?</h4><p>Tarify jsou navrženy pro přeshraniční provoz v CZ/PL/SK a EU. U datových tarifů platí férové limity dle podmínek tarifu.</p></div>
+      <h2>Jak to funguje</h2>
+      <p class="lead">
+        Founio má v sobě několik operátorů — českého, polského i slovenského.<br>
+        Tvůj telefon se automaticky připojí k té síti, která má právě nejlepší signál.
+      </p>
+
+      <div class="card-glass" style="max-width:900px; margin:0 auto">
+        <p style="margin:0 0 6px">📡 Když se pohybuješ, eSIM plynule přepíná mezi sítěmi.</p>
+        <p style="margin:0 0 6px">💬 Hovor nepřeruší, data běží dál.</p>
+        <p style="margin:0">💸 Cena zůstává stejná, bez roamingových poplatků.</p>
+      </div>
+
+      <div class="card-glass" style="max-width:900px; margin:16px auto 0">
+        <h3 style="margin:0 0 8px">Jednoduše. Okamžitě. Spolehlivě.</h3>
+        <ol style="margin:0; padding-left:18px; line-height:1.8">
+          <li><strong>Vyber tarif</strong></li>
+          <li><strong>Zaplť přes Stripe Checkout</strong></li>
+          <li><strong>Do pár minut ti přijde e-mail s QR kódem eSIM</strong></li>
+        </ol>
+        <p style="margin:12px 0 0">📱 Naskenuj, potvrď, hotovo. Founio začne fungovat ihned — bez čekání a bez smluv.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== KONTAKT (DARK GLASS) ===== -->
-  <section id="kontakt" class="contact-wrap" aria-label="Kontakt">
+  <!-- ===== FAQ ===== -->
+  <section id="faq" class="block" aria-label="Časté otázky">
+    <div class="section">
+      <h2>Časté otázky</h2>
+      <p class="lead">Krátké vysvětlení toho nejdůležitějšího.</p>
+      <div class="grid-2">
+        <div class="card-glass"><h4>Co je Multi-IMSI?</h4><p>SIM profil s více identitami (IMSI), mezi nimiž zařízení přepíná podle kvality a dostupnosti sítě — stabilnější signál, méně výpadků.</p></div>
+        <div class="card-glass"><h4>Potřebuji nový telefon?</h4><p>Stačí zařízení s eSIM (většina novějších iPhone a Android). Founio funguje jako druhá eSIM vedle vaší primární SIM.</p></div>
+        <div class="card-glass"><h4>Jak probíhá aktivace?</h4><p>Po zaplacení e-mailem dorazí QR kód. Naskenujete v nastavení telefonu a během pár minut je hotovo.</p></div>
+        <div class="card-glass"><h4>FUP a data v EU?</h4><p>Tarify jsou navrženy pro přeshraniční provoz v CZ/PL/SK a EU. U datových tarifů platí férové limity dle podmínek tarifu.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KONTAKT ===== -->
+  <section id="kontakt" class="block" aria-label="Kontakt" style="padding-bottom:90px">
     <div class="section">
       <h2>Kontakt</h2>
       <p class="lead">Napište si o firemní řešení pro týmy u hranic.</p>
-      <div class="contact-grid">
-        <div class="contact-card">
+      <div class="grid-2">
+        <div class="card-glass">
           <h3>Ozvěte se nám</h3>
           <p><strong>E-mail:</strong> hello@founio.cz<br>
              <strong>Telefon:</strong> +420 000 000 000<br>
              <small>Po–Pá 9:00–17:00</small></p>
           <p>Pomůžeme s výběrem tarifu, aktivací více eSIM najednou i fakturací na IČO.</p>
         </div>
-        <form class="contact-card" onsubmit="event.preventDefault(); alert('Díky! Ozveme se.');">
+        <form class="card-glass" onsubmit="event.preventDefault(); alert('Díky! Ozveme se.');">
           <label>Jméno<br><input class="input" required type="text" name="name" placeholder="Jan Novák"></label><br>
           <label>E-mail<br><input class="input" required type="email" name="email" placeholder="jan.novak@example.com"></label><br>
           <label>Zpráva<br><textarea class="input" rows="4" name="msg" placeholder="Krátce popište, co potřebujete…" required></textarea></label><br>
@@ -411,6 +378,7 @@
     }
 
     function setBilling(mode){
+      if(!monthlyBtn || !annualBtn) return;
       cards.forEach(card=>{
         const v = card.querySelector('.value');
         const period = card.querySelector('.period');
@@ -423,15 +391,15 @@
           period.textContent = '/ měs.';
         }
       });
-      monthlyBtn.classList.toggle('active', mode==='monthly');
-      annualBtn.classList.toggle('active', mode==='annual');
-      monthlyBtn.setAttribute('aria-selected', mode==='monthly');
-      annualBtn.setAttribute('aria-selected', mode==='annual');
+      monthlyBtn.style.background = mode==='monthly' ? 'linear-gradient(135deg, var(--accent), var(--accent-2))' : 'transparent';
+      monthlyBtn.style.color = mode==='monthly' ? '#001018' : '#dfe6ff';
+      annualBtn.style.background = mode==='annual' ? 'linear-gradient(135deg, var(--accent), var(--accent-2))' : 'transparent';
+      annualBtn.style.color = mode==='annual' ? '#001018' : '#dfe6ff';
     }
+    setBilling('monthly');
     if(monthlyBtn && annualBtn){
       monthlyBtn.addEventListener('click', ()=>setBilling('monthly'));
       annualBtn.addEventListener('click',  ()=>setBilling('annual'));
-      setBilling('monthly'); // default
     }
 
     // Stripe Checkout — nahraď URL vlastními session odkazy:
@@ -451,3 +419,4 @@
   </script>
 </body>
 </html>
+
