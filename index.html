@@ -57,140 +57,58 @@
     .nav a:hover{background:rgba(0,0,0,.04); opacity:1}
     .nav-spacer{flex:1}
 
-    /* Hero */
-    .hero{
-      max-width:1100px; margin:0 auto; padding:72px 20px 16px;
-      text-align:center;
-    }
-    .hero h1{
-      margin:0 0 14px; font-size:clamp(28px,4.2vw,48px); line-height:1.08; font-weight:900;
-      letter-spacing:-.3px;
-    }
-    .hero p{
-      margin:0 auto; max-width:760px; color:var(--muted); font-size:clamp(16px,1.9vw,19px);
-      line-height:1.6;
-    }
-    .hero-cta{margin-top:26px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
-    .btn{
-      appearance:none; border:0; cursor:pointer; border-radius:14px; padding:14px 18px;
-      font-weight:700; font-size:15px;
-      transition:transform .06s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
-    }
-    .btn-primary{
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#001018; box-shadow: var(--shadow);
-    }
-    .btn-primary:hover{transform:translateY(-1px)}
-    .btn-ghost{background:#eef6ff; color:#003247}
-    .btn-ghost:hover{background:#e4f2ff}
+    <!-- Hero -->
+<section class="hero" id="uvod" style="
+  background: linear-gradient(180deg, #0a1125 0%, #101b3a 100%);
+  color: #f7f9ff;
+  position: relative;
+  padding: 100px 20px 40px;
+  text-align: center;
+">
+  <h1 style="font-size: clamp(28px,4.2vw,48px); font-weight: 900; margin: 0 0 14px; line-height: 1.1;">
+    Druhá eSIM, která nikdy neztratí signál
+  </h1>
+  <p style="color: #c7d3ff; max-width: 760px; margin: 0 auto; font-size: clamp(16px,1.9vw,19px); line-height: 1.6;">
+    Multi-IMSI řešení s pokrytím celé Evropy bez roamingu. Automatické přepínání mezi sítěmi – ideální pro život na hranici CZ/PL/SK, řidiče a každého, kdo potřebuje spolehlivá data a volání.
+  </p>
 
-    /* Features (ikonky) */
-    .features{max-width:1100px; margin:40px auto 0; padding:0 20px}
-    .f-grid{
-      display:grid; gap:14px;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-    .f-item{
-      background:var(--card); border-radius:16px; padding:14px 16px; text-align:left;
-      display:flex; gap:12px; align-items:flex-start; border:1px solid var(--ring);
-    }
-    .f-ico{
-      width:28px; height:28px; border-radius:8px; flex:0 0 auto;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    }
-    .f-item h3{margin:0 0 4px; font-size:15px}
-    .f-item p{margin:0; color:var(--muted); font-size:14px; line-height:1.5}
+  <div style="margin-top: 28px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+    <a href="#tarify" style="
+      text-decoration: none;
+      background: linear-gradient(135deg,#00c8ff,#00a9ff);
+      color: #001018;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,200,255,0.3);
+      transition: transform 0.15s ease;
+    " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+      Vybrat tarif
+    </a>
+    <a href="#faq" style="
+      text-decoration: none;
+      background: rgba(255,255,255,0.1);
+      color: #dce6ff;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: background 0.15s ease;
+    " onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+      Jak to funguje?
+    </a>
+  </div>
 
-    /* Waves under hero */
-    .waves-wrap{
-      position:relative; width:100%; height:180px; overflow:hidden; background:transparent; margin-top:24px;
-    }
-    .waves-wrap svg{
-      position:absolute; bottom:0; left:0; width:200%; height:100%;
-      animation:waveMove 12s linear infinite;
-    }
-    @keyframes waveMove{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  <!-- Vlny -->
+  <div class="waves-wrap" aria-hidden="true" style="height: 200px; margin-top: 60px;">
+    <svg viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,60 C300,120 900,0 1200,60 L1200,200 L0,200 Z" fill="#0f1c3d" opacity="0.45"></path>
+      <path d="M0,100 C300,160 900,40 1200,100 L1200,200 L0,200 Z" fill="#16285a" opacity="0.65"></path>
+      <path d="M0,140 C300,200 900,80 1200,140 L1200,200 L0,200 Z" fill="#1f3c80"></path>
+    </svg>
+  </div>
+</section>
 
-    /* Pricing */
-    .pricing{padding:38px 20px 80px}
-    .container{max-width:1100px; margin:0 auto}
-    .section-head{text-align:center; margin-bottom:20px}
-    .section-head h2{margin:0 0 8px; font-size:clamp(22px,3vw,32px)}
-    .section-head p{margin:0; color:var(--muted)}
-    .pricing-grid{
-      display:grid; gap:16px; grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-    .p-card{
-      background:var(--bg); border:1px solid var(--ring); border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:20px; display:flex; flex-direction:column; gap:10px;
-    }
-    .p-card h4{margin:0; font-size:18px}
-    .badge{
-      display:inline-block; font-size:12px; font-weight:700; padding:4px 8px; border-radius:999px;
-      background:#ecf9ff; color:#005871; border:1px solid #cdefff;
-    }
-    .price{font-size:28px; font-weight:900}
-    .p-card ul{list-style:none; padding:0; margin:8px 0 0}
-    .p-card ul li{padding-left:22px; position:relative; margin:8px 0; color:var(--muted)}
-    .p-card ul li:before{
-      content:""; position:absolute; left:0; top:7px; width:10px; height:10px; border-radius:3px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    }
-    .buy{margin-top:auto}
-
-    /* FAQ */
-    .faq{padding:20px 20px 60px}
-    .faq-grid{display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr))}
-    .qa{border:1px solid var(--ring); border-radius:14px; padding:16px; background:var(--card)}
-    .qa h4{margin:0 0 6px}
-
-    /* Contact */
-    .contact{padding:30px 20px 80px}
-    .contact-card{
-      border:1px solid var(--ring); background:var(--bg); border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:20px; display:grid; gap:12px;
-      grid-template-columns:1.3fr 1fr;
-    }
-    .contact small{color:var(--muted)}
-
-    /* Footer */
-    footer{border-top:1px solid var(--ring); padding:24px 20px; text-align:center; color:var(--muted)}
-
-    /* Responsive */
-    @media (max-width:960px){
-      .f-grid{grid-template-columns:1fr}
-      .pricing-grid{grid-template-columns:1fr}
-      .faq-grid{grid-template-columns:1fr}
-      .contact-card{grid-template-columns:1fr}
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Header -->
-  <header>
-    <nav class="nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <span>Founio</span>
-      </div>
-      <div class="nav-spacer"></div>
-      <a href="#tarify">Tarify</a>
-      <a href="#faq">FAQ</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero" id="uvod">
-    <h1>Druhá eSIM, která nikdy neztratí signál</h1>
-    <p>Multi-IMSI řešení s pokrytím celé Evropy bez roamingu. Automatické přepínání mezi sítěmi – ideální pro život na hranici CZ/PL/SK, řidiče a každého, kdo potřebuje spolehlivá data a volání.</p>
-
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#tarify">Vybrat tarif</a>
-      <a class="btn btn-ghost" href="#faq">Jak to funguje?</a>
-    </div>
-  </section>
 
   <!-- Features -->
   <section class="features" aria-label="Hlavní výhody">
