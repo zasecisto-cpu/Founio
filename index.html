@@ -13,6 +13,7 @@
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='12' width='64' height='64' fill='%2300d2ff'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='38' font-family='Inter' fill='%23001018'%3EF%3C/text%3E%3C/svg%3E">
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap">
@@ -30,7 +31,7 @@
       --hero-sub:#c7d3ff;
       --wave-1:#0f1c3d; --wave-2:#16285a; --wave-3:#1f3c80;
 
-      /* Light body */
+      /* Light (not used now for FAQ/Contact, everything dark glass) */
       --light-bg:#ffffff; --light-text:#0e1630; --light-muted:#5b6071;
 
       /* Cards/lines */
@@ -87,7 +88,7 @@
     .h-eyebrow{display:inline-flex; align-items:center; gap:8px; padding:6px 10px;
       background:rgba(255,255,255,.06); border:1px solid var(--stroke); border-radius:999px; font-size:12px; color:var(--muted)}
     .hero h1{margin:10px 0 12px; font-size:clamp(32px,5vw,56px); line-height:1.06; letter-spacing:-.4px}
-    .hero p{margin:0; color:var(--muted); font-size:clamp(16px,1.6vw,18px); line-height:1.7}
+    .hero p{margin:0; color:var(--hero-sub); font-size:clamp(16px,1.6vw,18px); line-height:1.7}
     .actions{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
     .hero-card{
       border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
@@ -128,9 +129,7 @@
     .section h2{margin:0 0 10px; font-size:clamp(24px,3vw,36px)}
     .section p.lead{margin:0 0 18px; color:var(--muted)}
     /* Toggle */
-    .billing{
-      margin:14px 0 24px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;
-    }
+    .billing{ margin:14px 0 24px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
     .pill{
       display:inline-flex; align-items:center; gap:6px; padding:6px; border-radius:999px;
       background:rgba(255,255,255,.06); border:1px solid var(--stroke);
@@ -154,23 +153,18 @@
       display:flex; flex-direction:column; gap:12px;
       isolation:isolate;
     }
-    .p-edge{ /* gradient edge glow */
-      position:absolute; inset:-1px; border-radius:22px; padding:1px; pointer-events:none;
+    .p-edge{position:absolute; inset:-1px; border-radius:22px; padding:1px; pointer-events:none;
       background:linear-gradient(135deg, #00d2ff55, #2a86ff55);
       mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor; mask-composite:exclude;
-      z-index:-1;
-    }
+      -webkit-mask-composite:xor; mask-composite:exclude; z-index:-1;}
     .badge{
       display:inline-block; font-size:12px; font-weight:800; padding:4px 8px; border-radius:999px;
       background:rgba(0,210,255,.15); color:#89ecff; border:1px solid rgba(0,210,255,.35)
     }
     .badge.hot{ background:rgba(42,134,255,.18); color:#beddff; border-color:rgba(42,134,255,.4)}
     .title{font-weight:900; font-size:18px}
-    .price{
-      font-size:34px; font-weight:900; letter-spacing:-.2px;
-    }
+    .price{ font-size:34px; font-weight:900; letter-spacing:-.2px; }
     .period{font-weight:700; opacity:.8; font-size:14px}
     .inc{font-size:12px; color:#9fb0ff}
     .list{list-style:none; padding:0; margin:6px 0 0}
@@ -183,24 +177,59 @@
     .buy{margin-top:auto}
     .pcard button{width:100%}
 
-    /* Light sections */
-    .light{ background:var(--light-bg); color:var(--light-text) }
-    .light .lead{ color:var(--light-muted) }
+    /* ===== FAQ (dark glass style) ===== */
+    .faq-wrap{
+      position:relative;
+      padding:64px 0 80px;
+      background:
+        radial-gradient(900px 420px at 90% -10%, #2a86ff22 0%, transparent 60%),
+        radial-gradient(1000px 500px at 5% 10%, #00d2ff1f 0%, transparent 60%),
+        linear-gradient(180deg, #0b1330, #0a1022 55%, #0a1020);
+      color:var(--text);
+      border-top:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .faq-grid{display:grid; gap:14px; grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:14px}
+    .qa{
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid var(--stroke); border-radius:16px; padding:16px;
+      box-shadow:0 12px 36px rgba(0,0,0,.35);
+    }
+    .qa h4{margin:0 0 6px}
+    .qa p{margin:0; color:#d6defe}
 
-    /* FAQ/Contact (light) */
-    .faq .qa{background:#f6f8fb; border:1px solid var(--ring); border-radius:14px; padding:16px}
-    .faq-grid{display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:20px}
-    .contact-grid{display:grid; gap:16px; grid-template-columns:1.2fr .8fr; margin-top:20px}
-    .contact-card{background:#fff; border:1px solid var(--ring); border-radius:18px; padding:20px; box-shadow:0 12px 30px rgba(14,22,48,.08)}
-    .input{width:100%; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,.08)}
+    /* ===== Kontakt (dark glass style) ===== */
+    .contact-wrap{
+      position:relative;
+      padding:64px 0 90px;
+      background:
+        radial-gradient(900px 420px at 10% -10%, #2a86ff22 0%, transparent 60%),
+        radial-gradient(1000px 500px at 95% 10%, #00d2ff1f 0%, transparent 60%),
+        linear-gradient(180deg, #0b1330, #0a1022 55%, #0a1020);
+      color:var(--text);
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    .contact-grid{display:grid; gap:16px; grid-template-columns:1.2fr .8fr; margin-top:16px}
+    .contact-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid var(--stroke); border-radius:18px; padding:20px;
+      box-shadow:0 12px 36px rgba(0,0,0,.35);
+    }
+    .contact-card small{color:#c7d3ff}
+    .input{
+      width:100%; padding:12px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:#f6f8ff;
+      outline:none; transition:border-color .15s ease, background .15s ease;
+    }
+    .input::placeholder{color:#b8c3ff}
+    .input:focus{border-color:#5ddcff; background:rgba(255,255,255,.1)}
 
     footer{border-top:1px solid rgba(255,255,255,.08); color:#cfd6ff; text-align:center; padding:26px 20px; margin-top:10px}
 
     /* Responsive */
     @media (max-width:1024px){ .hero{grid-template-columns:1fr} .hero-card{order:2} }
     @media (max-width:920px){
-      .f-grid, .pricing-grid{grid-template-columns:1fr}
-      .faq-grid{grid-template-columns:1fr}
+      .f-grid, .pricing-grid, .faq-grid{grid-template-columns:1fr}
       .contact-grid{grid-template-columns:1fr}
       .mini-cta{display:none}
     }
@@ -328,10 +357,9 @@
     </div>
   </section>
 
-  <!-- ===== LIGHT SECTIONS ===== -->
-  <main class="light">
-    <!-- FAQ -->
-    <section id="faq" class="section faq">
+  <!-- ===== FAQ (DARK GLASS) ===== -->
+  <section id="faq" class="faq-wrap" aria-label="Časté otázky">
+    <div class="section">
       <h2>Časté otázky</h2>
       <p class="lead">Krátké vysvětlení toho nejdůležitějšího.</p>
       <div class="faq-grid">
@@ -340,10 +368,12 @@
         <div class="qa"><h4>Jak probíhá aktivace?</h4><p>Po zaplacení e-mailem dorazí QR kód. Naskenujete v nastavení telefonu a během pár minut je hotovo.</p></div>
         <div class="qa"><h4>FUP a data v EU?</h4><p>Tarify jsou navrženy pro přeshraniční provoz v CZ/PL/SK a EU. U datových tarifů platí férové limity dle podmínek tarifu.</p></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Kontakt -->
-    <section id="kontakt" class="section">
+  <!-- ===== KONTAKT (DARK GLASS) ===== -->
+  <section id="kontakt" class="contact-wrap" aria-label="Kontakt">
+    <div class="section">
       <h2>Kontakt</h2>
       <p class="lead">Napište si o firemní řešení pro týmy u hranic.</p>
       <div class="contact-grid">
@@ -355,14 +385,14 @@
           <p>Pomůžeme s výběrem tarifu, aktivací více eSIM najednou i fakturací na IČO.</p>
         </div>
         <form class="contact-card" onsubmit="event.preventDefault(); alert('Díky! Ozveme se.');">
-          <label>Jméno<br><input class="input" required type="text" name="name"></label><br>
-          <label>E-mail<br><input class="input" required type="email" name="email"></label><br>
-          <label>Zpráva<br><textarea class="input" rows="4" name="msg" required></textarea></label><br>
+          <label>Jméno<br><input class="input" required type="text" name="name" placeholder="Jan Novák"></label><br>
+          <label>E-mail<br><input class="input" required type="email" name="email" placeholder="jan.novak@example.com"></label><br>
+          <label>Zpráva<br><textarea class="input" rows="4" name="msg" placeholder="Krátce popište, co potřebujete…" required></textarea></label><br>
           <button class="btn btn-primary" type="submit">Odeslat</button>
         </form>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <footer>© <span id="y"></span> Founio — Multi-IMSI eSIM pro CZ/PL/SK.</footer>
 
@@ -380,7 +410,7 @@
         const v = card.querySelector('.value');
         const period = card.querySelector('.period');
         if(mode === 'annual'){
-          v.textContent = card.dataset.annual;   // už je zapsaná cena za rok se slevou
+          v.textContent = card.dataset.annual;   // cena za rok se slevou
           period.textContent = '/ rok';
         }else{
           v.textContent = card.dataset.month;
@@ -392,9 +422,11 @@
       monthlyBtn.setAttribute('aria-selected', mode==='monthly');
       annualBtn.setAttribute('aria-selected', mode==='annual');
     }
-    monthlyBtn.addEventListener('click', ()=>setBilling('monthly'));
-    annualBtn.addEventListener('click',  ()=>setBilling('annual'));
-    setBilling('monthly'); // default
+    if(monthlyBtn && annualBtn){
+      monthlyBtn.addEventListener('click', ()=>setBilling('monthly'));
+      annualBtn.addEventListener('click',  ()=>setBilling('annual'));
+      setBilling('monthly'); // default
+    }
 
     // Stripe Checkout — nahraď URL vlastními session odkazy:
     const urls = {
@@ -413,3 +445,4 @@
   </script>
 </body>
 </html>
+
