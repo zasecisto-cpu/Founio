@@ -31,7 +31,7 @@
       --hero-sub:#c7d3ff;
       --wave-1:#0f1c3d; --wave-2:#16285a; --wave-3:#1f3c80;
 
-      /* Light (not used now for FAQ/Contact, everything dark glass) */
+      /* Light (unused for FAQ/Contact now) */
       --light-bg:#ffffff; --light-text:#0e1630; --light-muted:#5b6071;
 
       /* Cards/lines */
@@ -98,7 +98,7 @@
     .kpis{display:grid; grid-template-columns: repeat(3,1fr); gap:10px}
     .kpi{background:rgba(255,255,255,.06); border:1px solid var(--stroke); border-radius:14px; padding:10px}
     .kpi strong{font-size:18px}
-    .kpi small{color:var(--muted)}
+    .kpi small{color:#b8c3ff}
 
     /* Features (dark glass) */
     .features{max-width:var(--maxw); margin:24px auto 0; padding:0 20px}
@@ -106,7 +106,7 @@
     .f{background:rgba(255,255,255,.06); border:1px solid var(--stroke); border-radius:16px; padding:16px}
     .ico{width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); margin-bottom:10px}
     .f h3{margin:0 0 6px; font-size:16px}
-    .f p{margin:0; color:var(--muted); font-size:14px; line-height:1.6}
+    .f p{margin:0; color:#b8c3ff; font-size:14px; line-height:1.6}
 
     /* Waves (dark) */
     .waves{position:relative; height:160px; margin-top:34px; overflow:hidden}
@@ -127,7 +127,7 @@
     }
     .section{max-width:var(--maxw); margin:0 auto; padding:0 20px}
     .section h2{margin:0 0 10px; font-size:clamp(24px,3vw,36px)}
-    .section p.lead{margin:0 0 18px; color:var(--muted)}
+    .section p.lead{margin:0 0 18px; color:#b8c3ff}
     /* Toggle */
     .billing{ margin:14px 0 24px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
     .pill{
@@ -177,7 +177,7 @@
     .buy{margin-top:auto}
     .pcard button{width:100%}
 
-    /* ===== FAQ (dark glass style) ===== */
+    /* ===== FAQ (dark glass) ===== */
     .faq-wrap{
       position:relative;
       padding:64px 0 80px;
@@ -198,7 +198,7 @@
     .qa h4{margin:0 0 6px}
     .qa p{margin:0; color:#d6defe}
 
-    /* ===== Kontakt (dark glass style) ===== */
+    /* ===== Kontakt (dark glass) ===== */
     .contact-wrap{
       position:relative;
       padding:64px 0 90px;
@@ -294,7 +294,7 @@
   <section class="pricing-wrap" id="tarify" aria-label="Ceník">
     <div class="section">
       <h2>Ceník Founio</h2>
-      <p class="lead">Vše s DPH. Platba přes Stripe Checkout. Přepněte na roční a získejte 2 měsíce zdarma.</p>
+      <p class="lead">Vše s DPH. Platba přes Stripe Checkout. Při roční platbě získáte <strong>10 % slevu</strong>.</p>
 
       <!-- Toggle -->
       <div class="billing">
@@ -302,12 +302,12 @@
           <button id="bill-monthly" class="active" role="tab" aria-selected="true">Měsíčně</button>
           <button id="bill-annual" role="tab" aria-selected="false">Ročně</button>
         </div>
-        <span class="save">☘️ 2 měsíce zdarma u roční platby</span>
+        <span class="save">💎 10 % sleva u roční platby</span>
       </div>
 
       <div class="pricing-grid">
         <!-- START -->
-        <article class="pcard" data-plan="start" data-month="299" data-annual="2990">
+        <article class="pcard" data-plan="start" data-month="299">
           <div class="p-edge"></div>
           <span class="badge">Nejlevnější start</span>
           <div class="title">Founio Start</div>
@@ -323,7 +323,7 @@
         </article>
 
         <!-- TALK -->
-        <article class="pcard" data-plan="talk" data-month="499" data-annual="4990">
+        <article class="pcard" data-plan="talk" data-month="499">
           <div class="p-edge"></div>
           <span class="badge hot">Nejpopulárnější</span>
           <div class="title">Founio Talk</div>
@@ -339,7 +339,7 @@
         </article>
 
         <!-- DATA -->
-        <article class="pcard" data-plan="data" data-month="599" data-annual="5990">
+        <article class="pcard" data-plan="data" data-month="599">
           <div class="p-edge"></div>
           <span class="badge">Pro data</span>
           <div class="title">Founio Data</div>
@@ -400,20 +400,26 @@
     // Footer year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Billing toggle (monthly ↔ annual)
+    // Billing toggle (monthly ↔ annual with 10% discount)
     const monthlyBtn = document.getElementById('bill-monthly');
     const annualBtn  = document.getElementById('bill-annual');
     const cards = document.querySelectorAll('.pcard');
+
+    function calcAnnual(month) {
+      // 12 měsíců se slevou 10 %, zaokrouhleno na celé Kč
+      return Math.round(month * 12 * 0.9);
+    }
 
     function setBilling(mode){
       cards.forEach(card=>{
         const v = card.querySelector('.value');
         const period = card.querySelector('.period');
+        const month = Number(card.dataset.month);
         if(mode === 'annual'){
-          v.textContent = card.dataset.annual;   // cena za rok se slevou
+          v.textContent = calcAnnual(month);
           period.textContent = '/ rok';
         }else{
-          v.textContent = card.dataset.month;
+          v.textContent = month;
           period.textContent = '/ měs.';
         }
       });
@@ -445,4 +451,3 @@
   </script>
 </body>
 </html>
-
