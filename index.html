@@ -2,271 +2,241 @@
 <html lang="cs">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Founio – Druhá eSIM, která nikdy neztratí signál</title>
-  <meta name="description" content="Multi-IMSI eSIM s plynulým přepínáním mezi sítěmi v CZ/PL/SK a celé EU. Bez roamingu, bez starostí." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Founio — Druhá eSIM, která nikdy neztratí signál</title>
+  <meta name="description" content="Founio: Multi-IMSI eSIM pro CZ/PL/SK. Plynulé přepínání sítí, bez roamingu, aktivace do pár minut." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
   <style>
     :root{
-      --bg:#ffffff;
-      --text:#0e1630;
-      --muted:#5b6071;
-      --accent:#00AEEF;
-      --accent-2:#39c9ff;
-      --card:#f6f8fb;
-      --ring: rgba(0,0,0,.06);
-      --radius:18px;
-      --shadow:0 6px 16px rgba(14,22,48,.08), 0 2px 6px rgba(14,22,48,.06);
+      /* Paleta inspirovaná Pay3 */
+      --bg-1:#0a1020;      /* hlavní tmavé pozadí */
+      --bg-2:#101a3a;      /* sekundární */
+      --glass:#0f1730aa;   /* sklo */
+      --card:#0f1730;      /* tmavá karta */
+      --stroke:rgba(255,255,255,.08);
+      --text:#f6f8ff;
+      --muted:#b8c3ff;
+      --accent:#00d2ff;    /* tyrkys */
+      --accent-2:#2a86ff;  /* modrá */
+      --good:#31d0aa;
 
-      /* Dark hero palette */
-      --hero-top:#0a1125;
-      --hero-bottom:#101b3a;
-      --hero-text:#f7f9ff;
-      --hero-sub:#c7d3ff;
-      --hero-cta:#00c8ff;
-      --hero-cta-2:#00a9ff;
-      --wave-1:#0f1c3d;
-      --wave-2:#16285a;
-      --wave-3:#1f3c80;
+      --radius:18px;
+      --shadow:0 12px 40px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.25);
+      --inset:inset 0 1px 0 rgba(255,255,255,.06), inset 0 -1px 0 rgba(0,0,0,.25);
+      --ring:0 0 0 1px var(--stroke);
+      --maxw:1150px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:var(--bg);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      margin:0; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text); background:
+        radial-gradient(1200px 600px at 85% -10%, #1a2c70 0%, transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, #142a55 0%, transparent 55%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      overflow-x:hidden;
     }
+
+    /* Dekorativní blob pozadí */
+    .blob, .blob2{
+      position:fixed; z-index:-1; filter:blur(60px); opacity:.25; pointer-events:none;
+      transform:translateZ(0);
+    }
+    .blob{ width:520px; height:520px; right:-120px; top:-120px;
+      background:radial-gradient(closest-side, #2a86ff, transparent);
+      animation:float1 18s ease-in-out infinite;
+    }
+    .blob2{ width:420px; height:420px; left:-120px; bottom:-120px;
+      background:radial-gradient(closest-side, #00d2ff, transparent);
+      animation:float2 22s ease-in-out infinite;
+    }
+    @keyframes float1{ 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,18px)}}
+    @keyframes float2{ 0%,100%{transform:translate(0,0)} 50%{transform:translate(24px,-16px)}}
 
     /* Header */
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(1.2) blur(8px);
-      background:rgba(255,255,255,.8);
-      border-bottom:1px solid var(--ring);
-    }
-    .nav{
-      max-width:1100px; margin:0 auto;
-      padding:14px 20px; display:flex; align-items:center; gap:16px;
-    }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
-    .brand .logo{
-      width:28px; height:28px; border-radius:8px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,.6);
-    }
-    .nav a{
-      text-decoration:none; color:var(--text); opacity:.84; font-weight:600;
-      padding:8px 10px; border-radius:10px;
-    }
-    .nav a:hover{background:rgba(0,0,0,.04); opacity:1}
-    .nav-spacer{flex:1}
+    header{position:sticky; top:0; z-index:40; backdrop-filter:blur(10px) saturate(1.2);
+      background:rgba(8,12,24,.5); box-shadow:var(--inset); border-bottom:1px solid var(--stroke);}
+    .nav{max-width:var(--maxw); margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:16px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800;}
+    .logo{width:30px; height:30px; border-radius:8px; box-shadow:inset 0 0 0 2px rgba(255,255,255,.2);
+      background:conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent));}
+    .nav a{color:var(--text); text-decoration:none; opacity:.85; font-weight:600; padding:8px 12px; border-radius:10px}
+    .nav a:hover{opacity:1; background:rgba(255,255,255,.06)}
+    .spacer{flex:1}
+    .mini-cta{display:none}
+    @media (min-width:880px){ .mini-cta{display:inline-flex} }
 
-    /* Hero (DARK) */
-    .hero{
-      background: linear-gradient(180deg, var(--hero-top) 0%, var(--hero-bottom) 100%);
-      color: var(--hero-text);
-      position: relative;
-      text-align:center;
-      padding:100px 20px 16px;
-    }
-    .hero h1{
-      margin:0 0 14px; font-size:clamp(28px,4.2vw,48px); line-height:1.08; font-weight:900;
-      letter-spacing:-.3px; color:var(--hero-text);
-    }
-    .hero p{
-      margin:0 auto; max-width:760px; color:var(--hero-sub); font-size:clamp(16px,1.9vw,19px);
-      line-height:1.6;
-    }
-    .hero-cta{margin-top:26px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+    /* Hero */
+    .hero{max-width:var(--maxw); margin:0 auto; padding:80px 20px 40px; display:grid; gap:24px;
+      grid-template-columns: 1.1fr .9fr; align-items:center}
+    .h-eyebrow{display:inline-flex; align-items:center; gap:8px; padding:6px 10px;
+      background:rgba(255,255,255,.06); border:1px solid var(--stroke); border-radius:999px; font-size:12px; color:var(--muted)}
+    .hero h1{margin:10px 0 12px; font-size:clamp(32px,5vw,56px); line-height:1.06; letter-spacing:-.4px}
+    .hero p{margin:0; color:var(--muted); font-size:clamp(16px,1.6vw,18px); line-height:1.7}
+    .actions{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
     .btn{
       appearance:none; border:0; cursor:pointer; border-radius:14px; padding:14px 18px;
-      font-weight:700; font-size:15px;
-      transition:transform .06s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
-      text-decoration:none; display:inline-block;
+      font-weight:800; font-size:15px; letter-spacing:.2px; display:inline-flex; align-items:center; gap:10px;
+      transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
+      text-decoration:none;
     }
-    /* Default (light sections) */
+    .btn:active{transform:translateY(1px)}
     .btn-primary{
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#001018; box-shadow: var(--shadow);
+      color:#001018; background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 12px 36px rgba(0,210,255,.35);
     }
-    .btn-primary:hover{transform:translateY(-1px)}
-    .btn-ghost{background:#eef6ff; color:#003247}
-    .btn-ghost:hover{background:#e4f2ff}
-    /* Overrides inside dark hero */
-    .hero .btn-primary{
-      background: linear-gradient(135deg, var(--hero-cta), var(--hero-cta-2));
-      color:#001018; box-shadow: 0 6px 20px rgba(0,200,255,.3);
+    .btn-ghost{
+      color:#dfe6ff; background:rgba(255,255,255,.06); border:1px solid var(--stroke);
     }
-    .hero .btn-ghost{
-      background: rgba(255,255,255,0.10);
-      color:#dce6ff; border:1px solid rgba(255,255,255,0.15);
+    .hero-card{
+      border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow: var(--shadow); border:1px solid var(--stroke); padding:18px;
     }
-    .hero .btn-ghost:hover{background:rgba(255,255,255,0.18)}
+    .hero-card h3{margin:0 0 10px}
+    .kpis{display:grid; grid-template-columns: repeat(3,1fr); gap:10px}
+    .kpi{background:rgba(255,255,255,.06); border:1px solid var(--stroke); border-radius:14px; padding:10px}
+    .kpi strong{font-size:18px}
+    .kpi small{color:var(--muted)}
 
-    /* Features (light) */
-    .features{max-width:1100px; margin:40px auto 0; padding:0 20px}
-    .f-grid{
-      display:grid; gap:14px;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-    .f-item{
-      background:var(--card); border-radius:16px; padding:14px 16px; text-align:left;
-      display:flex; gap:12px; align-items:flex-start; border:1px solid var(--ring);
-    }
-    .f-ico{
-      width:28px; height:28px; border-radius:8px; flex:0 0 auto;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    }
-    .f-item h3{margin:0 0 4px; font-size:15px}
-    .f-item p{margin:0; color:var(--muted); font-size:14px; line-height:1.5}
+    /* Features (světlé sklo karty) */
+    .features{max-width:var(--maxw); margin:24px auto 0; padding:0 20px}
+    .f-grid{display:grid; gap:14px; grid-template-columns:repeat(3,minmax(0,1fr))}
+    .f{background:rgba(255,255,255,.06); border:1px solid var(--stroke); border-radius:16px; padding:16px}
+    .ico{width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); margin-bottom:10px}
+    .f h3{margin:0 0 6px; font-size:16px}
+    .f p{margin:0; color:var(--muted); font-size:14px; line-height:1.6}
 
-    /* Waves (DARK shades, still under hero; features zůstávají nad vlnami) */
-    .waves-wrap{
-      position:relative; width:100%; height:180px; overflow:hidden; background:transparent; margin-top:24px;
-    }
-    .waves-wrap svg{
-      position:absolute; bottom:0; left:0; width:200%; height:100%;
-      animation:waveMove 12s linear infinite;
-    }
-    @keyframes waveMove{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    /* Waves separator (tmavé -> světlé) */
+    .waves{position:relative; height:160px; margin-top:34px; overflow:hidden}
+    .waves svg{position:absolute; left:0; bottom:0; width:200%; height:100%; animation:slide 14s linear infinite}
+    @keyframes slide{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+    .light{ background:#ffffff; color:#0e1630 }
 
-    /* Pricing (light) */
-    .pricing{padding:38px 20px 80px}
-    .container{max-width:1100px; margin:0 auto}
-    .section-head{text-align:center; margin-bottom:20px}
-    .section-head h2{margin:0 0 8px; font-size:clamp(22px,3vw,32px)}
-    .section-head p{margin:0; color:var(--muted)}
-    .pricing-grid{
-      display:grid; gap:16px; grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-    .p-card{
-      background:var(--bg); border:1px solid var(--ring); border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:20px; display:flex; flex-direction:column; gap:10px;
-    }
-    .p-card h4{margin:0; font-size:18px}
-    .badge{
-      display:inline-block; font-size:12px; font-weight:700; padding:4px 8px; border-radius:999px;
-      background:#ecf9ff; color:#005871; border:1px solid #cdefff;
-    }
-    .price{font-size:28px; font-weight:900}
-    .p-card ul{list-style:none; padding:0; margin:8px 0 0}
-    .p-card ul li{padding-left:22px; position:relative; margin:8px 0; color:var(--muted)}
-    .p-card ul li:before{
-      content:""; position:absolute; left:0; top:7px; width:10px; height:10px; border-radius:3px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    }
+    /* Pricing (světlá sekce) */
+    .section{max-width:var(--maxw); margin:0 auto; padding:60px 20px}
+    .section h2{margin:0 0 8px; font-size:clamp(24px,3vw,34px)}
+    .section p.lead{margin:0; color:#5b6071}
+    .pricing-grid{display:grid; gap:16px; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:20px}
+    .card{background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:18px; box-shadow:0 12px 30px rgba(14,22,48,.08); padding:20px; display:flex; flex-direction:column; gap:12px}
+    .badge{display:inline-block; font-size:12px; font-weight:800; padding:4px 8px; border-radius:999px; background:#ecf9ff; color:#005871; border:1px solid #cdefff}
+    .price{font-size:30px; font-weight:900}
+    .card ul{list-style:none; padding:0; margin:4px 0 0}
+    .card li{margin:8px 0; padding-left:22px; position:relative; color:#5b6071}
+    .card li:before{content:""; position:absolute; left:0; top:7px; width:10px; height:10px; border-radius:3px; background:linear-gradient(135deg,var(--accent),var(--accent-2))}
     .buy{margin-top:auto}
 
-    /* FAQ (light) */
-    .faq{padding:20px 20px 60px}
-    .faq-grid{display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr))}
-    .qa{border:1px solid var(--ring); border-radius:14px; padding:16px; background:var(--card)}
+    /* FAQ */
+    .faq-grid{display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:20px}
+    .qa{background:#f6f8fb; border:1px solid rgba(0,0,0,.06); border-radius:14px; padding:16px}
     .qa h4{margin:0 0 6px}
 
-    /* Contact (light) */
-    .contact{padding:30px 20px 80px}
-    .contact-card{
-      border:1px solid var(--ring); background:var(--bg); border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:20px; display:grid; gap:12px;
-      grid-template-columns:1.3fr 1fr;
-    }
-    .contact small{color:var(--muted)}
+    /* Kontakt */
+    .contact-grid{display:grid; gap:16px; grid-template-columns:1.2fr .8fr; margin-top:20px}
+    .contact-card{background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:18px; padding:20px; box-shadow:0 12px 30px rgba(14,22,48,.08)}
+    .contact-card small{color:#5b6071}
+    .input{width:100%; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,.08)}
 
-    /* Footer */
-    footer{border-top:1px solid var(--ring); padding:24px 20px; text-align:center; color:var(--muted)}
+    footer{border-top:1px solid rgba(255,255,255,.08); color:#cfd6ff; text-align:center; padding:26px 20px; margin-top:10px}
 
     /* Responsive */
-    @media (max-width:960px){
-      .f-grid{grid-template-columns:1fr}
-      .pricing-grid{grid-template-columns:1fr}
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr}
+      .hero-card{order:2}
+    }
+    @media (max-width:920px){
+      .f-grid, .pricing-grid{grid-template-columns:1fr}
       .faq-grid{grid-template-columns:1fr}
-      .contact-card{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .mini-cta{display:none}
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- dekorativní světla -->
+  <div class="blob"></div>
+  <div class="blob2"></div>
+
   <header>
     <nav class="nav">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <span>Founio</span>
       </div>
-      <div class="nav-spacer"></div>
+      <div class="spacer"></div>
       <a href="#tarify">Tarify</a>
       <a href="#faq">FAQ</a>
       <a href="#kontakt">Kontakt</a>
+      <a class="btn btn-primary mini-cta" href="#tarify">Koupit eSIM</a>
     </nav>
   </header>
 
-  <!-- Hero (tmavý) -->
+  <!-- HERO (tmavý, pay3 vibe) -->
   <section class="hero" id="uvod">
-    <h1>Druhá eSIM, která nikdy neztratí signál</h1>
-    <p>Multi-IMSI řešení s pokrytím celé Evropy bez roamingu. Automatické přepínání mezi sítěmi – ideální pro život na hranici CZ/PL/SK, řidiče a každého, kdo potřebuje spolehlivá data a volání.</p>
-
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#tarify">Vybrat tarif</a>
-      <a class="btn btn-ghost" href="#faq">Jak to funguje?</a>
+    <div>
+      <span class="h-eyebrow">Multi-IMSI • CZ/PL/SK bez roamingu</span>
+      <h1>Druhá eSIM, která nikdy neztratí signál</h1>
+      <p>Telefon si vždy vybere nejlepší dostupnou síť a plynule přepne. Ideální pro život na hranici, řidiče i týmy v terénu.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#tarify">Vybrat tarif</a>
+        <a class="btn btn-ghost" href="#faq">Jak to funguje?</a>
+      </div>
     </div>
+
+    <aside class="hero-card">
+      <h3>Okamžitá aktivace</h3>
+      <p class="muted">Po zaplacení posíláme QR kód eSIM. iPhone i Android.</p>
+      <div class="kpis" style="margin-top:12px">
+        <div class="kpi"><strong>3–5 min</strong><br><small>typická aktivace</small></div>
+        <div class="kpi"><strong>EU</strong><br><small>pokrytí</small></div>
+        <div class="kpi"><strong>24/7</strong><br><small>spolehlivost</small></div>
+      </div>
+    </aside>
   </section>
 
-  <!-- Features (světlé) -->
+  <!-- Features (tmavé sklo, pořád na dark pozadí) -->
   <section class="features" aria-label="Hlavní výhody">
     <div class="f-grid">
-      <div class="f-item">
-        <div class="f-ico" aria-hidden="true"></div>
-        <div>
-          <h3>Plynulé přechody CZ/PL/SK</h3>
-          <p>Telefon si vždy vybere nejlepší dostupnou síť bez výpadků a bez ručního přepínání.</p>
-        </div>
+      <div class="f">
+        <div class="ico" aria-hidden="true"></div>
+        <h3>Plynulé přechody CZ/PL/SK</h3>
+        <p>Automatický výběr nejsilnější sítě bez výpadků a ručního přepínání.</p>
       </div>
-      <div class="f-item">
-        <div class="f-ico" aria-hidden="true"></div>
-        <div>
-          <h3>Bez roamingu</h3>
-          <p>Tarify koncipované pro přeshraniční provoz – volání i data bez nepříjemných překvapení.</p>
-        </div>
+      <div class="f">
+        <div class="ico" aria-hidden="true"></div>
+        <h3>Bez roamingu</h3>
+        <p>Tarify navržené pro přeshraniční provoz — férové podmínky bez překvapení.</p>
       </div>
-      <div class="f-item">
-        <div class="f-ico" aria-hidden="true"></div>
-        <div>
-          <h3>Aktivace do pár minut</h3>
-          <p>QR kód eSIM po zaplacení. Funguje v iPhone i Android telefonech s eSIM.</p>
-        </div>
+      <div class="f">
+        <div class="ico" aria-hidden="true"></div>
+        <h3>Aktivace do pár minut</h3>
+        <p>QR kód eSIM po zaplacení. Funguje na většině nových telefonů.</p>
       </div>
     </div>
   </section>
 
-  <!-- Vlny (tmavé odstíny) -->
-  <div class="waves-wrap" aria-hidden="true">
+  <!-- Waves separátor do světlé části -->
+  <div class="waves" aria-hidden="true">
     <svg viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,60 C300,120 900,0 1200,60 L1200,200 L0,200 Z" fill="var(--wave-1)" opacity="0.45"></path>
-      <path d="M0,100 C300,160 900,40 1200,100 L1200,200 L0,200 Z" fill="var(--wave-2)" opacity="0.65"></path>
-      <path d="M0,140 C300,200 900,80 1200,140 L1200,200 L0,200 Z" fill="var(--wave-3)"></path>
+      <path d="M0,60 C300,120 900,0 1200,60 L1200,200 L0,200 Z" fill="#0f1c3d" opacity="0.55"></path>
+      <path d="M0,100 C300,160 900,40 1200,100 L1200,200 L0,200 Z" fill="#16285a" opacity="0.75"></path>
+      <path d="M0,140 C300,200 900,80 1200,140 L1200,200 L0,200 Z" fill="#1f3c80"></path>
     </svg>
   </div>
 
-  <!-- PRICING (světlé) -->
-  <section id="tarify" class="pricing">
-    <div class="container">
-      <div class="section-head" style="color:#0e1630">
-        <h2>Nabídka tarifů</h2>
-        <p>Vše s DPH. Platba přes Stripe Checkout.</p>
-      </div>
+  <!-- PRICING (světlá sekce) -->
+  <main class="light" id="tarify">
+    <section class="section">
+      <h2>Nabídka tarifů</h2>
+      <p class="lead">Vše s DPH. Platba přes Stripe Checkout.</p>
 
       <div class="pricing-grid">
-        <!-- Plan 1 -->
-        <div class="p-card">
+        <article class="card">
           <span class="badge">Nejlevnější start</span>
-          <h4>Founio Start</h4>
+          <h3>Founio Start</h3>
           <div class="price">299 Kč</div>
           <ul>
             <li>60 minut + 10 SMS</li>
@@ -274,13 +244,12 @@
             <li>Plynulé přechody CZ/PL/SK</li>
             <li>Aktivace eSIM do pár minut</li>
           </ul>
-          <button class="btn btn-primary buy" data-plan="start">Koupit – eSIM</button>
-        </div>
+          <button class="btn btn-primary buy" data-plan="start">Koupit — eSIM</button>
+        </article>
 
-        <!-- Plan 2 -->
-        <div class="p-card">
+        <article class="card">
           <span class="badge">Nejpopulárnější</span>
-          <h4>Founio Talk</h4>
+          <h3>Founio Talk</h3>
           <div class="price">499 Kč</div>
           <ul>
             <li>Neomezené volání + 10 SMS</li>
@@ -288,99 +257,87 @@
             <li>Multi-IMSI bez výpadků</li>
             <li>Aktivace eSIM do pár minut</li>
           </ul>
-          <button class="btn btn-primary buy" data-plan="talk">Koupit – eSIM</button>
-        </div>
+          <button class="btn btn-primary buy" data-plan="talk">Koupit — eSIM</button>
+        </article>
 
-        <!-- Plan 3 -->
-        <div class="p-card">
+        <article class="card">
           <span class="badge">Pro data</span>
-          <h4>Founio Data</h4>
+          <h3>Founio Data</h3>
           <div class="price">599 Kč</div>
           <ul>
             <li>10 GB v CZ/PL/SK (EU)</li>
-            <li>Auto výběr nejlepší sítě</li>
+            <li>Automatický výběr nejlepší sítě</li>
             <li>Hotspot povolen</li>
             <li>Okamžitá aktivace eSIM</li>
           </ul>
-          <button class="btn btn-primary buy" data-plan="data">Koupit – eSIM</button>
-        </div>
+          <button class="btn btn-primary buy" data-plan="data">Koupit — eSIM</button>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FAQ (světlé) -->
-  <section id="faq" class="faq">
-    <div class="container">
-      <div class="section-head">
-        <h2>Časté otázky</h2>
-        <p>Krátké vysvětlení toho nejdůležitějšího.</p>
-      </div>
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <h2>Časté otázky</h2>
+      <p class="lead">Krátké vysvětlení toho nejdůležitějšího.</p>
 
       <div class="faq-grid">
         <div class="qa">
           <h4>Co je Multi-IMSI?</h4>
-          <p>SIM profil, který obsahuje více identit (IMSI) a umí mezi nimi přepínat podle dostupnosti a kvality sítě. Výsledek: stabilnější signál a méně výpadků.</p>
+          <p>SIM profil s více identitami (IMSI), mezi nimiž zařízení přepíná podle kvality a dostupnosti sítě — stabilnější signál, méně výpadků.</p>
         </div>
         <div class="qa">
           <h4>Potřebuji nový telefon?</h4>
-          <p>Stačí zařízení s podporou eSIM (většina novějších iPhone a Android modelů). Founio funguje jako druhá eSIM vedle vaší primární SIM.</p>
+          <p>Stačí zařízení s eSIM (většina novějších iPhone a Android). Founio funguje jako druhá eSIM vedle vaší primární SIM.</p>
         </div>
         <div class="qa">
           <h4>Jak probíhá aktivace?</h4>
-          <p>Po zaplacení dostanete e-mailem QR kód. Naskenujete v nastavení telefonu a eSIM je aktivní během pár minut.</p>
+          <p>Po zaplacení e-mailem dorazí QR kód. Naskenujete v nastavení telefonu a během pár minut je hotovo.</p>
         </div>
         <div class="qa">
           <h4>FUP a data v EU?</h4>
           <p>Tarify jsou navrženy pro přeshraniční provoz v CZ/PL/SK a EU. U datových tarifů platí férové limity dle podmínek tarifu.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Kontakt (světlé) -->
-  <section id="kontakt" class="contact">
-    <div class="container">
-      <div class="section-head">
-        <h2>Kontakt</h2>
-        <p>Napište si o firemní řešení pro týmy u hranic.</p>
-      </div>
+    <!-- Kontakt -->
+    <section id="kontakt" class="section">
+      <h2>Kontakt</h2>
+      <p class="lead">Napište si o firemní řešení pro týmy u hranic.</p>
 
-      <div class="contact-card">
-        <div>
-          <h3>Máte otázky k integraci nebo fakturaci?</h3>
-          <p>Pomůžeme s výběrem tarifu, aktivací více eSIM naráz i s fakturací na IČO.</p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Ozvěte se nám</h3>
           <p><strong>E-mail:</strong> hello@founio.cz<br>
              <strong>Telefon:</strong> +420 000 000 000<br>
-             <small>Po-Pá 9:00–17:00</small>
-          </p>
+             <small>Po–Pá 9:00–17:00</small></p>
+          <p>Pomůžeme s výběrem tarifu, aktivací více eSIM najednou i fakturací na IČO.</p>
         </div>
-        <form id="contactForm" onsubmit="event.preventDefault(); alert('Díky! Ozveme se.');">
-          <label>Jméno<br><input required type="text" name="name" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--ring)"></label><br><br>
-          <label>E-mail<br><input required type="email" name="email" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--ring)"></label><br><br>
-          <label>Zpráva<br><textarea required name="msg" rows="4" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--ring)"></textarea></label><br><br>
+        <form class="contact-card" onsubmit="event.preventDefault(); alert('Díky! Ozveme se.');">
+          <label>Jméno<br><input class="input" required type="text" name="name"></label><br>
+          <label>E-mail<br><input class="input" required type="email" name="email"></label><br>
+          <label>Zpráva<br><textarea class="input" rows="4" name="msg" required></textarea></label><br>
           <button class="btn btn-primary" type="submit">Odeslat</button>
         </form>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    © <span id="y"></span> Founio — Multi-IMSI eSIM pro CZ/PL/SK. Všechna práva vyhrazena.
+    © <span id="y"></span> Founio — Multi-IMSI eSIM pro CZ/PL/SK.
   </footer>
 
   <script>
-    // Rok ve footru
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Stripe Checkout – placeholder logika (nahraď vlastní implementací).
-    document.querySelectorAll('.buy').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const plan = btn.getAttribute('data-plan');
-        alert('Vybraný plán: '+plan+' — sem přidej přesměrování na Stripe.');
+    // Stripe – nahraď přesměrováním na svou Checkout session.
+    document.querySelectorAll('.buy').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        const plan = b.dataset.plan;
+        alert('Vybraný plán: '+plan+' — sem přidej přesměrování na Stripe Checkout URL.');
+        // window.location.href = 'https://checkout.stripe.com/c/session_...';
       });
     });
   </script>
 </body>
 </html>
-
-
